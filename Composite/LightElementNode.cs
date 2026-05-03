@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Tracing;
+using System.Text;
 
 namespace Composite;
 
@@ -9,6 +10,8 @@ public class LightElementNode : LightNode
     public string ClosingType { get; }
     public List<string> CssClasses { get; }
     private List<LightNode> _children = new List<LightNode>();
+
+    private Dictionary<string, List<Action>> _eventListeners = new Dictionary<string, List<Action>>();
 
     public LightElementNode(string tagName, string displayType, string closingType, List<string> cssClasses = null)
     {
@@ -34,5 +37,27 @@ public class LightElementNode : LightNode
 
         if (ClosingType == "single") return openTag;
         return $"{openTag}{InnerHtml()}</{TagName}>";
+    }
+
+    public void AddEventListener(string eventType, Action listener)
+    {
+        if (!_eventListeners.ContainsKey(eventType))
+        {
+            _eventListeners[eventType] = new List<Action>();
+        }
+        _eventListeners[eventType].Add(listener);
+    }
+
+
+    public void DispatchEvent(string eventType)
+    {
+        if (_eventListeners.ContainsKey(eventType))
+        {
+            Console.WriteLine($"\n--- Triggering event: {eventType} on <{TagName}> ---");
+            foreach (var listener in _eventListeners[eventType])
+            {
+                listener.Invoke();
+            }
+        }
     }
 }
