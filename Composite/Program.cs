@@ -20,3 +20,13 @@ li2.AddEventListener("mouseover", () => Console.WriteLine("Обробник: К�
 
 li2.DispatchEvent("click");
 li2.DispatchEvent("mouseover");
+
+Console.WriteLine("\n--- Завдання 4: Стратегія ---");
+
+var img1 = new LightImageNode("https://example.com/cats.png");
+Console.WriteLine(img1.Render());
+
+Console.WriteLine();
+
+var img2 = new LightImageNode("C:/images/dogs.jpg");
+Console.WriteLine(img2.Render());
