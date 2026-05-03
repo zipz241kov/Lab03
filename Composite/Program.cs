@@ -13,3 +13,10 @@ ul.Add(li2);
 
 Console.WriteLine(ul.OuterHtml());
 Console.WriteLine();
+
+li2.AddEventListener("click", () => Console.WriteLine("Обробник 1"));
+li2.AddEventListener("click", () => Console.WriteLine("Обробник 2"));
+li2.AddEventListener("mouseover", () => Console.WriteLine("Обробник: Курсор наведено на кнопку."));
+
+li2.DispatchEvent("click");
+li2.DispatchEvent("mouseover");
