@@ -1,4 +1,4 @@
-﻿namespace Composite;
+﻿namespace HTMLCreator;
 
 public interface IImageLoadStrategy
 {

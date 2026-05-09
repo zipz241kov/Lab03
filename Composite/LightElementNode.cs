@@ -1,7 +1,6 @@
-﻿using System.Diagnostics.Tracing;
-using System.Text;
+﻿using System.Text;
 
-namespace Composite;
+namespace HTMLCreator;
 
 public class LightElementNode : LightNode
 {
@@ -60,4 +59,8 @@ public class LightElementNode : LightNode
             }
         }
     }
+
+    public override void OnCreated() => Console.WriteLine($"[Hook] Вузол <{TagName}> створено.");
+    public override void OnStylesApplied() => Console.WriteLine($"[Hook] Стилі застосовано до <{TagName}>.");
+    public override void OnTextRendered() => Console.WriteLine($"[Hook] Рендеринг <{TagName}> завершено.");
 }
