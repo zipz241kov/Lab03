@@ -1,32 +1,19 @@
-﻿using Composite;
+﻿using HTMLCreator;
 
 
-Console.WriteLine("--- Завдання 5: Компонувальник ---");
-var ul = new LightElementNode("ul", "block", "pair", new List<string> { "my-list" });
-var li1 = new LightElementNode("li", "block", "pair");
-li1.Add(new LightTextNode("Пункт 1"));
-var li2 = new LightElementNode("li", "block", "pair");
-li2.Add(new LightTextNode("Пункт 2"));
+var div = new LightElementNode("div", "block", "pair", new List<string> { "container" });
 
-ul.Add(li1);
-ul.Add(li2);
+var h1 = new LightElementNode("h1", "block", "pair");
+h1.Add(new LightTextNode("Головний заголовок"));
 
-Console.WriteLine(ul.OuterHtml());
-Console.WriteLine();
+var p = new LightElementNode("p", "block", "pair", new List<string> { "text-muted" });
+p.Add(new LightTextNode("Це текстовий абзац"));
 
-li2.AddEventListener("click", () => Console.WriteLine("Обробник 1"));
-li2.AddEventListener("click", () => Console.WriteLine("Обробник 2"));
-li2.AddEventListener("mouseover", () => Console.WriteLine("Обробник: Курсор наведено на кнопку."));
+var img = new LightImageNode("https://example.com/logo.png");
 
-li2.DispatchEvent("click");
-li2.DispatchEvent("mouseover");
+div.Add(h1);
+div.Add(p);
+div.Add(img);
 
-Console.WriteLine("\n--- Завдання 4: Стратегія ---");
-
-var img1 = new LightImageNode("https://example.com/cats.png");
-Console.WriteLine(img1.Render());
-
-Console.WriteLine();
-
-var img2 = new LightImageNode("C:/images/dogs.jpg");
-Console.WriteLine(img2.Render());
+Console.WriteLine("\nPR 1: Шаблонний метод");
+string renderedHtml = div.Render();
