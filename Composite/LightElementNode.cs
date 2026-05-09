@@ -63,4 +63,6 @@ public class LightElementNode : LightNode
     public override void OnCreated() => Console.WriteLine($"[Hook] Вузол <{TagName}> створено.");
     public override void OnStylesApplied() => Console.WriteLine($"[Hook] Стилі застосовано до <{TagName}>.");
     public override void OnTextRendered() => Console.WriteLine($"[Hook] Рендеринг <{TagName}> завершено.");
+
+    public override IEnumerable<LightNode> GetChildren() => _children;
 }
