@@ -17,3 +17,24 @@ div.Add(img);
 
 Console.WriteLine("\nPR 1: Шаблонний метод");
 string renderedHtml = div.Render();
+
+
+Console.WriteLine("\nPR 2: Ітератор");
+
+Console.WriteLine("Обхід в глибину (DFS)");
+ILightNodeIterator dfs = new DepthFirstIterator(div);
+while (dfs.HasNext())
+{
+    var node = dfs.Next();
+    if (node is LightElementNode el) Console.WriteLine($"Знайдено тег: <{el.TagName}>");
+    else if (node is LightTextNode txt) Console.WriteLine($"Знайдено текст: {txt.OuterHtml()}");
+}
+
+Console.WriteLine("\nОбхід в ширину (BFS)");
+ILightNodeIterator bfs = new BreadthFirstIterator(div);
+while (bfs.HasNext())
+{
+    var node = bfs.Next();
+    if (node is LightElementNode el) Console.WriteLine($"Знайдено тег: <{el.TagName}>");
+    else if (node is LightTextNode txt) Console.WriteLine($"Знайдено текст: {txt.OuterHtml()}");
+}
