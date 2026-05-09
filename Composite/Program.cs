@@ -58,7 +58,7 @@ Console.WriteLine($"Після Undo: \n{p.GetOriginalOuterHtml()}");
 
 
 // State
-Console.WriteLine("\nPR 4: Стан (State)");
+Console.WriteLine("\nPR 4: Стан");
 
 Console.WriteLine($"Звичайний стан h1:\n{h1.OuterHtml()}");
 
@@ -66,3 +66,13 @@ h1.State = new HiddenState();
 Console.WriteLine($"Прихованийстан h1:\n{h1.OuterHtml()}");
 
 h1.State = new VisibleState();
+
+
+// Visitor
+Console.WriteLine("\nPR 5: Відвідувач");
+var textExtractor = new TextExtractorVisitor();
+
+div.Accept(textExtractor);
+
+Console.WriteLine("Витягнутий чистий текст з усього DOM-дерева:");
+Console.WriteLine(textExtractor.ExtractedText.ToString().Trim());
