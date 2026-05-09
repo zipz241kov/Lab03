@@ -15,10 +15,13 @@ div.Add(h1);
 div.Add(p);
 div.Add(img);
 
+
+// Template
 Console.WriteLine("\nPR 1: Шаблонний метод");
 string renderedHtml = div.Render();
 
 
+// Iterator
 Console.WriteLine("\nPR 2: Ітератор");
 
 Console.WriteLine("Обхід в глибину (DFS)");
@@ -38,3 +41,17 @@ while (bfs.HasNext())
     if (node is LightElementNode el) Console.WriteLine($"Знайдено тег: <{el.TagName}>");
     else if (node is LightTextNode txt) Console.WriteLine($"Знайдено текст: {txt.OuterHtml()}");
 }
+
+
+// Command
+Console.WriteLine("\nPR 3: Команда");
+var commandManager = new CommandManager();
+
+Console.WriteLine($"До виконання команди: \n{p.OuterHtml()}");
+
+var addHighlight = new AddClassCommand(p, "highlight");
+commandManager.ExecuteCommand(addHighlight);
+Console.WriteLine($"Після додавання класу: \n{p.OuterHtml()}");
+
+commandManager.UndoLast();
+Console.WriteLine($"Після Undo: \n{p.OuterHtml()}");
