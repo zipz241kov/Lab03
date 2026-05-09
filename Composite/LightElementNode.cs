@@ -31,6 +31,11 @@ public class LightElementNode : LightNode
 
     public override string OuterHtml()
     {
+        return State.RenderState(this);
+    }
+
+    public string GetOriginalOuterHtml()
+    {
         string classes = CssClasses.Count > 0 ? $" class=\"{string.Join(" ", CssClasses)}\"" : "";
         string openTag = $"<{TagName}{classes}>";
 
@@ -65,4 +70,6 @@ public class LightElementNode : LightNode
     public override void OnTextRendered() => Console.WriteLine($"[Hook] Рендеринг <{TagName}> завершено.");
 
     public override IEnumerable<LightNode> GetChildren() => _children;
+
+    public INodeState State { get; set; } = new VisibleState();
 }

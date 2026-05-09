@@ -47,11 +47,22 @@ while (bfs.HasNext())
 Console.WriteLine("\nPR 3: Команда");
 var commandManager = new CommandManager();
 
-Console.WriteLine($"До виконання команди: \n{p.OuterHtml()}");
+Console.WriteLine($"До виконання команди: \n{p.GetOriginalOuterHtml()}");
 
 var addHighlight = new AddClassCommand(p, "highlight");
 commandManager.ExecuteCommand(addHighlight);
-Console.WriteLine($"Після додавання класу: \n{p.OuterHtml()}");
+Console.WriteLine($"Після додавання класу: \n{p.GetOriginalOuterHtml()}");
 
 commandManager.UndoLast();
-Console.WriteLine($"Після Undo: \n{p.OuterHtml()}");
+Console.WriteLine($"Після Undo: \n{p.GetOriginalOuterHtml()}");
+
+
+// State
+Console.WriteLine("\nPR 4: Стан (State)");
+
+Console.WriteLine($"Звичайний стан h1:\n{h1.OuterHtml()}");
+
+h1.State = new HiddenState();
+Console.WriteLine($"Прихованийстан h1:\n{h1.OuterHtml()}");
+
+h1.State = new VisibleState();
