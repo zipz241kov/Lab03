@@ -19,4 +19,6 @@ public abstract class LightNode
     public abstract string InnerHtml();
 
     public virtual IEnumerable<LightNode> GetChildren() => Enumerable.Empty<LightNode>();
+
+    public abstract void Accept(IVisitor visitor);
 }

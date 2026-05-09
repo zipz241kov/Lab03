@@ -72,4 +72,13 @@ public class LightElementNode : LightNode
     public override IEnumerable<LightNode> GetChildren() => _children;
 
     public INodeState State { get; set; } = new VisibleState();
+
+    public override void Accept(IVisitor visitor)
+    {
+        visitor.Visit(this);
+        foreach (var child in _children)
+        {
+            child.Accept(visitor);
+        }
+    }
 }

@@ -28,4 +28,6 @@ public class LightImageNode: LightNode
     public override string OuterHtml() => Render();
 
     public override string InnerHtml() => Render();
+
+    public override void Accept(IVisitor visitor) => visitor.Visit(this);
 }
